@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión - DevDiary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <a href="{{ url_for('index') }}" class="logo-link">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo" width="40" height="40">
+            <span class="logo-text">DevDiary</span>
+        </a>
+    </header>
+    <main class="main-login">
+        <form action="{{ url_for('login_post') }}" method="post" class="form__card">
+            <h2>Bienvenido a DevDiary</h2>
+
+            {% if registered %}
+            <p class="ok-msg">¡Cuenta creada! Ahora inicia sesión.</p>
+            {% endif %}
+
+            {% if error %}
+            <p class="error-msg">{{ error }}</p>
+            {% endif %}
+
+            <div class="form__inputs">
+                <label for="email" class="form__label">
+                    Correo electrónico
+                    <input class="form__input" type="email" name="email" id="email" placeholder="Ingresa tu e-mail" required>
+                </label>
+
+                <label for="password" class="form__label">
+                    contraseña
+                    <input class="form__input" type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
+                </label>
+                {# ──────────────────────────────────────────────────────────────
+                   TAREA 2 · Campo de contraseña
+                   Copia el campo del correo (el <label> completo, con su <input>)
+                   y cámbialo para que pida la contraseña:
+                     · for del label → password
+                     · type          → password   (¿qué hace el navegador con lo que escribes?)
+                     · name          → password   (¿para quién es el name: usuario o servidor?)
+                     · id            → password   (debe coincidir con el for del label)
+                     · placeholder   → Ingresa tu contraseña
+                   Texto visible del label: Contraseña
+                ────────────────────────────────────────────────────────────── #}
+            </div>
+
+            <button type="submit" class="form__button">Iniciar sesión</button>
+            <p class="form__alt">¿No tienes cuenta? <a href="{{ url_for('reg') }}">Regístrate aquí</a></p>
+        </form>
+    </main>
+</body>
+</html>

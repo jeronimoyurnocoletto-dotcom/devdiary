@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Entrada - DevDiary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <a href="{{ url_for('index') }}" class="logo-link">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo" width="40" height="40">
+            <span class="logo-text">DevDiary</span>
+        </a>
+        <div class="header__user">
+            <span>{{ session['email'] }}</span>
+            <a class="header__logout" href="{{ url_for('logout') }}">Salir</a>
+        </div>
+    </header>
+    <main>
+        <form action="{{ url_for('create_post') }}" method="post" class="creat-form">
+            <div class="form__card">
+                <h2>Nueva Entrada</h2>
+
+                <div class="form__inputs">
+                    <label for="title" class="form__label">
+                        Título
+                        <input class="form__input" type="text" name="title" id="title" maxlength="100" placeholder="Ej: Hoy aprendí SQLAlchemy" required>
+                    </label>
+                    <label for="subtitle" class="form__label">
+                        Subtítulo
+                        <input class="form__input" type="text" name="subtitle" id="subtitle" maxlength="300" placeholder="Un resumen breve" required>
+                    </label>
+                </div>
+
+                <label for="text" class="form__label full-width">
+                    Contenido
+                    <textarea class="form__text" name="text" id="text" required placeholder="Escribe tus apuntes, pensamientos o código aquí..."></textarea>
+                </label>
+
+                <button type="submit" class="form__button">Guardar Entrada</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

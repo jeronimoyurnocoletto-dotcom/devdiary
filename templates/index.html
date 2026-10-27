@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Mi Diario Dev</title>
+</head>
+<body>
+  <header class="header">
+    <a href="{{ url_for('index') }}" class="logo-link">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo" width="40" height="40">
+        <span class="logo-text">DevDiary</span>
+    </a>
+    <div class="header__user">
+        <span>{{ session['email'] }}</span>
+        <a class="header__logout" href="{{ url_for('logout') }}">Salir</a>
+    </div>
+  </header>
+  <main>
+    <h1 class="main__title">Mis Entradas</h1>
+
+    {% if not cards %}
+    <p class="empty-msg">Todavía no tienes entradas. Cada persona ve solo su propio diario: crea la primera con el botón +</p>
+    {% endif %}
+
+    <ul class="cards-list">
+
+      {% for el in cards %}
+      <li class="card">
+        <a class="card__link" href="{{ url_for('card', id=el.id) }}">
+          <img class="card__img" src="{{ url_for('static', filename='img/post_icon.png') }}" alt="Ícono de entrada">
+          <div class="card__text">
+            <h2 class="card__title">{{ el.title }}</h2>
+            <p class="card__subtitle">{{ el.subtitle }}</p>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+
+      <!-- Botón para crear nueva tarjeta -->
+      <li class="card card--creat">
+          <a class="creat__link" href="{{ url_for('create') }}">
+              <span class="plus-icon">+</span>
+          </a>
+      </li>
+
+    </ul>
+  </main>
+</body>
+</html>
